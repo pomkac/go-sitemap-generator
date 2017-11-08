@@ -57,7 +57,7 @@ func (b *BuilderFile) Add(url interface{}) BuilderError {
 // isFileCanFit checks bytes to bigger than consts values.
 func (b *BuilderFile) isFileCanFit(bytes []byte) bool {
 	r := len(append(b.content, bytes...)) < MaxSitemapFilesize
-	r = r && b.linkcnt < MaxSitemapLinks
+	r = r && b.linkcnt < b.opts.maxSitemapLinks
 	return r && b.newscnt < MaxSitemapNews
 }
 

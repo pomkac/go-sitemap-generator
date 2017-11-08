@@ -4,31 +4,33 @@ package stm
 func NewOptions() *Options {
 	// Default values
 	return &Options{
-		defaultHost:  "http://www.example.com",
-		sitemapsHost: "", // http://s3.amazonaws.com/sitemap-generator/,
-		publicPath:   "public/",
-		sitemapsPath: "sitemaps/",
-		filename:     "sitemap",
-		verbose:      true,
-		compress:     true,
-		pretty:       false,
-		adp:          NewFileAdapter(),
+		defaultHost:     "http://www.example.com",
+		sitemapsHost:    "", // http://s3.amazonaws.com/sitemap-generator/,
+		publicPath:      "public/",
+		sitemapsPath:    "sitemaps/",
+		filename:        "sitemap",
+		verbose:         true,
+		compress:        true,
+		pretty:          false,
+		adp:             NewFileAdapter(),
+		maxSitemapLinks: MaxSitemapLinks,
 	}
 }
 
 // Options exists for the Sitemap struct.
 type Options struct {
-	defaultHost  string
-	sitemapsHost string
-	publicPath   string
-	sitemapsPath string
-	filename     string
-	verbose      bool
-	compress     bool
-	pretty       bool
-	adp          Adapter
-	nmr          *Namer
-	loc          *Location
+	defaultHost     string
+	sitemapsHost    string
+	publicPath      string
+	sitemapsPath    string
+	filename        string
+	verbose         bool
+	compress        bool
+	pretty          bool
+	adp             Adapter
+	nmr             *Namer
+	loc             *Location
+	maxSitemapLinks int
 }
 
 // SetDefaultHost sets that arg from Sitemap.Finalize method
@@ -69,6 +71,13 @@ func (opts *Options) SetCompress(compress bool) {
 // SetPretty option sets pretty option to Options struct which allows pretty formatting to output files.
 func (opts *Options) SetPretty(pretty bool) {
 	opts.pretty = pretty
+}
+
+func (opts *Options) SetMaxSitemapLinks(size int) {
+	if size > MaxSitemapLinks{
+		size = MaxSitemapLinks
+	}
+	opts.maxSitemapLinks = size
 }
 
 // SetAdapter sets that arg from Sitemap.SetAdapter method
