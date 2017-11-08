@@ -66,6 +66,10 @@ func (sm *Sitemap) SetPretty(pretty bool) {
 	sm.opts.SetPretty(pretty)
 }
 
+func (sm *Sitemap) SetMaxSitemapLinks(size int) {
+	sm.opts.SetMaxSitemapLinks(size)
+}
+
 // SetFilename can apply any name in this method if you wants to change output file name
 func (sm *Sitemap) SetFilename(filename string) {
 	sm.opts.SetFilename(filename)
